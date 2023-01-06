@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API specification for enosix SAP Mule connector for sales document search operation.",
+    "description": "Often, you use a Sales Document Search as a starting point for creating a workflow, such as retrieving detailed information about a sales document. For example, this search command returns a `salesDocument` string for each sales document record that's retrieved from SAP. Then you can call the associated Sales Document Detail command with that `salesDocument` string to retrieve details about a specific sales document.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081/"
+    }
+  ],
+  "paths": {
+    "/search/salesdocument": {
+      "get": {
+        "description": "Use this search API end point to find specific sales documents in SAP.",
+        "parameters": [
+          {
+            "name": "completedOnly",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "customerPONumber",
+            "in": "query",
+            "schema": {
+              "maxLength": 20,
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromCreateDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "fromSalesDocumentNumber",
+            "in": "query",
+            "schema": {
+              "maxLength": 10,
+              "type": "string"
+            }
+          },
+          {
+            "name": "leading",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "material",
+            "in": "query",
+            "schema": {
+              "maxLength": 18,
+              "type": "string"
+            }
+          },
+          {
+            "name": "openOnly",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "salesDocumentVersionNumber",
+            "in": "query",
+            "schema": {
+              "maxLength": 12,
+              "type": "string"
+            }
+          },
+          {
+            "name": "shipToParty",
+            "in": "query",
+            "schema": {
+              "maxLength": 10,
+              "type": "string"
+            }
+          },
+          {
+            "name": "shipToPurchaseOrderNumber",
+            "in": "query",
+            "schema": {
+              "maxLength": 35,
+              "type": "string"
+            }
+          },
+          {
+            "name": "soldToParty",
+            "in": "query",
+            "schema": {
+              "maxLength": 10,
+              "type": "string"
+            }
+          },
+          {
+            "name": "toCreateDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "toSalesDocumentNumber",
+            "in": "query",
+            "schema": {
+              "maxLength": 10,
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionGroup",
+            "in": "query",
+            "schema": {
+              "maxLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "schema": {
+              "maxLength": 12,
+              "type": "string"
+            }
+          },
+          {
+            "name": "billingBlock",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "creditBlock",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "deliveryBlock",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "yourReference",
+            "in": "query",
+            "schema": {
+              "maxLength": 12,
+              "type": "string"
+            }
+          },
+          {
+            "name": "salesDocumentType",
+            "in": "query",
+            "schema": {
+              "maxLength": 4,
+              "type": "string"
+            }
+          },
+          {
+            "name": "chbDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "cheDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalesDocuments"
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Bad request"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Resource not found"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Method not allowed"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "406": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Not acceptable"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "415": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Unsupported media type"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          },
+          "501": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Not Implemented"
+                  }
+                }
+              }
+            },
+            "x-amf-mediaType": "application/json"
+          }
+        }
+      },
+      "x-amf-displayName": "Search SalesDocument"
+    }
+  },
+  "components": {
+    "schemas": {
+      "SalesDocuments": {
+        "type": "object",
+        "properties": {
+          "PageInfo": {
+            "$ref": "#/components/schemas/type"
+          },
+          "SalesDcoument": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/items"
+            }
+          }
+        },
+        "example": {
+          "PageInfo": {
+            "PageSize": 3,
+            "PageNumber": 1,
+            "TotalRecords": 221
+          },
+          "SalesDocuments": [
+            {
+              "BillingBlock": "",
+              "BillingBlockDescription": "",
+              "CreateDate": "2017-11-21T00:00:00.000Z",
+              "CreditBlock": "",
+              "CreditBlockDescription": "Credit check was not executed/Status not set",
+              "Custom01": "8148 ",
+              "Custom02": "",
+              "Custom03": "9058 ",
+              "Custom04": "",
+              "Custom05": "1270 ",
+              "Custom06": "",
+              "Custom07": "9134 ",
+              "Custom08": "",
+              "Custom09": "6324 ",
+              "Custom10": "",
+              "CustomerPONumber": "",
+              "DeliveryBlock": "",
+              "DeliveryBlockDescription": "",
+              "DeliveryStatus": "00",
+              "DeliveryStatusDescription": "",
+              "EndDate": "1901-01-01T00:00:00.000Z",
+              "EnosixObjKey": "14425",
+              "EnosixObjType": "SFCISalesDocument",
+              "GoodsIssuedQuantity": "0.000",
+              "LastChangedDate": "1901-01-01T00:00:00.000Z",
+              "NetValueInDocumentCurrency": "",
+              "OrderStatus": "Open",
+              "SalesDocument": "14425",
+              "SalesDocumentType": "",
+              "SalesDocumentVersionNumber": "",
+              "SDDocumentCurrency": "USD",
+              "SalesDocumentTypeDescription": "Standard Order",
+              "ShipToCity": "",
+              "ShipToCountry": "US",
+              "ShipToCountryDescription": "",
+              "ShipToName": "REI-Atlanta",
+              "ShipToParty": "500070",
+              "ShipToPurchaseOrderNumber": "",
+              "ShipToRegion": "",
+              "ShipToRegionDescription": "Georgia",
+              "SoldToCity": "Atlanta",
+              "SoldToCountry": "",
+              "SoldToCountryDescription": "United States",
+              "SoldToName": "",
+              "SoldToParty": "",
+              "SoldToRegion": "GA",
+              "SoldToRegionDescription": "",
+              "StartDate": "1901-01-01T00:00:00.000Z",
+              "TaxAmountInDocumentCurrency": "0.00",
+              "TotalQuantity": "0.000",
+              "TransactionGroup": "",
+              "YourReference": ""
+            },
+            {
+              "BillingBlock": "",
+              "BillingBlockDescription": "",
+              "CreateDate": "2017-11-21T00:00:00.000Z",
+              "CreditBlock": "",
+              "CreditBlockDescription": "Credit check was not executed/Status not set",
+              "Custom01": "976 ",
+              "Custom02": "",
+              "Custom03": "2785 ",
+              "Custom04": "",
+              "Custom05": "5469 ",
+              "Custom06": "",
+              "Custom07": "9576 ",
+              "Custom08": "",
+              "Custom09": "9649 ",
+              "Custom10": "",
+              "CustomerPONumber": "",
+              "DeliveryBlock": "",
+              "DeliveryBlockDescription": "",
+              "DeliveryStatus": "00",
+              "DeliveryStatusDescription": "",
+              "EndDate": "1901-01-01T00:00:00.000Z",
+              "EnosixObjKey": "14426",
+              "EnosixObjType": "SFCISalesDocument",
+              "GoodsIssuedQuantity": "0.000",
+              "LastChangedDate": "1901-01-01T00:00:00.000Z",
+              "NetValueInDocumentCurrency": "",
+              "OrderStatus": "Open",
+              "SalesDocument": "14426",
+              "SalesDocumentType": "",
+              "SalesDocumentVersionNumber": "",
+              "SDDocumentCurrency": "USD",
+              "SalesDocumentTypeDescription": "Standard Order",
+              "ShipToCity": "",
+              "ShipToCountry": "US",
+              "ShipToCountryDescription": "",
+              "ShipToName": "REI-Atlanta",
+              "ShipToParty": "500070",
+              "ShipToPurchaseOrderNumber": "",
+              "ShipToRegion": "",
+              "ShipToRegionDescription": "Georgia",
+              "SoldToCity": "Atlanta",
+              "SoldToCountry": "",
+              "SoldToCountryDescription": "United States",
+              "SoldToName": "",
+              "SoldToParty": "",
+              "SoldToRegion": "GA",
+              "SoldToRegionDescription": "",
+              "StartDate": "1901-01-01T00:00:00.000Z",
+              "TaxAmountInDocumentCurrency": "2263345.00",
+              "TotalQuantity": "0.000",
+              "TransactionGroup": "",
+              "YourReference": ""
+            },
+            {
+              "BillingBlock": "",
+              "BillingBlockDescription": "",
+              "CreateDate": "2018-01-03T00:00:00.000Z",
+              "CreditBlock": "",
+              "CreditBlockDescription": "Credit check was not executed/Status not set",
+              "Custom01": "1577 ",
+              "Custom02": "",
+              "Custom03": "9706 ",
+              "Custom04": "",
+              "Custom05": "9572 ",
+              "Custom06": "",
+              "Custom07": "4854 ",
+              "Custom08": "",
+              "Custom09": "8003 ",
+              "Custom10": "",
+              "CustomerPONumber": "",
+              "DeliveryBlock": "",
+              "DeliveryBlockDescription": "",
+              "DeliveryStatus": "00",
+              "DeliveryStatusDescription": "",
+              "EndDate": "1901-01-01T00:00:00.000Z",
+              "EnosixObjKey": "14437",
+              "EnosixObjType": "SFCISalesDocument",
+              "GoodsIssuedQuantity": "0.000",
+              "LastChangedDate": "1901-01-01T00:00:00.000Z",
+              "NetValueInDocumentCurrency": "",
+              "OrderStatus": "Completed",
+              "SalesDocument": "14437",
+              "SalesDocumentType": "",
+              "SalesDocumentVersionNumber": "",
+              "SDDocumentCurrency": "USD",
+              "SalesDocumentTypeDescription": "Standard Order",
+              "ShipToCity": "",
+              "ShipToCountry": "US",
+              "ShipToCountryDescription": "",
+              "ShipToName": "REI-Atlanta",
+              "ShipToParty": "500070",
+              "ShipToPurchaseOrderNumber": "",
+              "ShipToRegion": "",
+              "ShipToRegionDescription": "Georgia",
+              "SoldToCity": "Atlanta",
+              "SoldToCountry": "",
+              "SoldToCountryDescription": "United States",
+              "SoldToName": "",
+              "SoldToParty": "",
+              "SoldToRegion": "GA",
+              "SoldToRegionDescription": "",
+              "StartDate": "1901-01-01T00:00:00.000Z",
+              "TaxAmountInDocumentCurrency": "810.94",
+              "TotalQuantity": "0.000",
+              "TransactionGroup": "",
+              "YourReference": ""
+            }
+          ]
+        }
+      },
+      "type": {
+        "type": "object",
+        "properties": {
+          "totalRecords": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          }
+        }
+      },
+      "items": {
+        "type": "object",
+        "properties": {
+          "BillingBlock": {
+            "maxLength": 2,
+            "type": "string"
+          },
+          "BillingBlockDescription": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "Custom01": {
+            "type": "string"
+          },
+          "Custom02": {
+            "type": "string"
+          },
+          "Custom03": {
+            "type": "string"
+          },
+          "Custom04": {
+            "type": "string"
+          },
+          "Custom05": {
+            "type": "string"
+          },
+          "Custom06": {
+            "type": "string"
+          },
+          "Custom07": {
+            "type": "string"
+          },
+          "Custom08": {
+            "type": "string"
+          },
+          "Custom09": {
+            "type": "string"
+          },
+          "Custom10": {
+            "type": "string"
+          },
+          "CreateDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "CreditBlock": {
+            "maxLength": 1,
+            "type": "string"
+          },
+          "CreditBlockDescription": {
+            "maxLength": 50,
+            "type": "string"
+          },
+          "CustomerPONumber": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "DeliveryBlock": {
+            "maxLength": 2,
+            "type": "string"
+          },
+          "DeliveryBlockDescription": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "DeliveryStatus": {
+            "maxLength": 2,
+            "type": "string"
+          },
+          "DeliveryStatusDescription": {
+            "maxLength": 40,
+            "type": "string"
+          },
+          "EndDate": {
+            "type": "string"
+          },
+          "GoodsIssuedQuantity": {
+            "type": "string"
+          },
+          "LastChangedDate": {
+            "type": "string"
+          },
+          "NetValueInDocumentCurrency": {
+            "type": "number",
+            "format": "double"
+          },
+          "OrderStatus": {
+            "maxLength": 10,
+            "type": "string"
+          },
+          "SDDocumentCurrency": {
+            "maxLength": 5,
+            "type": "string"
+          },
+          "SalesDocument": {
+            "maxLength": 10,
+            "type": "string"
+          },
+          "SalesDocumentType": {
+            "maxLength": 4,
+            "type": "string"
+          },
+          "SalesDocumentTypeDescription": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "SalesDocumentVersionNumber": {
+            "maxLength": 12,
+            "type": "string"
+          },
+          "ShipToCity": {
+            "maxLength": 40,
+            "type": "string"
+          },
+          "ShipToCountry": {
+            "maxLength": 3,
+            "type": "string"
+          },
+          "ShipToCountryDescription": {
+            "maxLength": 50,
+            "type": "string"
+          },
+          "ShipToName": {
+            "maxLength": 30,
+            "type": "string"
+          },
+          "ShipToParty": {
+            "maxLength": 10,
+            "type": "string"
+          },
+          "ShipToPurchaseOrderNumber": {
+            "maxLength": 35,
+            "type": "string"
+          },
+          "ShipToRegion": {
+            "maxLength": 3,
+            "type": "string"
+          },
+          "ShipToRegionDescription": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "SoldToCity": {
+            "maxLength": 40,
+            "type": "string"
+          },
+          "SoldToCountry": {
+            "maxLength": 3,
+            "type": "string"
+          },
+          "SoldToCountryDescription": {
+            "maxLength": 50,
+            "type": "string"
+          },
+          "SoldToName": {
+            "maxLength": 30,
+            "type": "string"
+          },
+          "SoldToParty": {
+            "maxLength": 10,
+            "type": "string"
+          },
+          "SoldToRegion": {
+            "maxLength": 3,
+            "type": "string"
+          },
+          "SoldToRegionDescription": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "StartDate": {
+            "type": "string"
+          },
+          "TaxAmountInDocumentCurrency": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalQuantity": {
+            "type": "string"
+          },
+          "TransactionGroup": {
+            "maxLength": 1,
+            "type": "string"
+          },
+          "YourReference": {
+            "maxLength": 12,
+            "type": "string"
+          },
+          "index": {
+            "maxLength": 10,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "description": "This API suuport basic authenntication",
+        "scheme": "basic"
+      }
+    }
+  }
+}
